@@ -1,9 +1,43 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { Pokemon } from './components/pokemon'
 import { Users } from './components/users'
 
+import { Route, Routes, useLocation } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
+
+
+const NotFound = () => {
+  return <div>Page not found</div>;
+};
+
 export const App: React.FC = () => {
+  return (
+    <div className="h-full">
+    <main className="max-h-screen flex flex-col">
+    <nav className="p-2 flex flex-row bg-blue-400 space-x-4">
+      <NavLink to="/">Home</NavLink>
+      <NavLink to="/pokemon">Pokemon</NavLink>
+      <NavLink to="/users">Users</NavLink>
+    </nav>
+    <section className="bg-yellow-200">
+      <Routes>
+        <Route path="/"  >
+          <Route index path="/" element={<Pokemon />} />
+          <Route path="/pokemon" element={<Pokemon />} />
+          <Route path="/users" element={<Users />} />
+        </Route>
+      </Routes>
+      </section>
+      </main>
+      </div>      
+
+      )
+}
+
+
+const UsersComponent: React.FC = () => {
   const [count, setCount] = useState(0)
 
   return (
@@ -39,7 +73,6 @@ export const App: React.FC = () => {
           </a>
         </p>
       </header>
-      <Users />
     </div>
   )
 }
